@@ -6,10 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
 public class EndToEndTest {
-    
-    public static void main(String[] args) throws InterruptedException {
 
-       // System.setProperty("webdriver.chrome.driver", "C://work//chromedriver.exe");
+    public static void main(String[] args) throws InterruptedException {
 
         WebDriver driver =new ChromeDriver();
 
