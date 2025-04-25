@@ -17,16 +17,20 @@ public class TestLoginPage {
     }
 
 
-    public void login() {
+    public void login() throws InterruptedException {
         //email
-        driver.findElement(By.id("username")).sendKeys("");
-        driver.findElement(By.id("password")).sendKeys("");
+        driver.findElement(By.id("username")).sendKeys("John.Matthew@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("John@123");
 
-        driver.findElement(By.xpath("//a[@id='forgot-passwordId']")).click();
+        //driver.findElement(By.xpath("//a[@id='forgot-passwordId']")).click();
+
+        driver.findElement(By.className("mat-select-placeholder mat-select-min-line ng-tns-c161-3 ng-star-inserted")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.className("mat-option-text")).click();
         
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         TestLoginPage testLoginPage = new TestLoginPage();
         testLoginPage.invokeBrowser();
         testLoginPage.login();
