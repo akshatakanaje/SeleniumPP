@@ -4,9 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class FunctionalTesting {
 
@@ -14,12 +18,25 @@ public class FunctionalTesting {
 
         WebDriver driver=new ChromeDriver();
 
+        //Implicit wait applies globally
+        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        //explicit wait applies to specific element
+        WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(5));
+
         String[] itemsNeeded= {"Cucumber","Brocolli","Beetroot"};
-
         driver.get("https://rahulshettyacademy.com/seleniumPractise/");
-        Thread.sleep(3000);
-
         addItems(driver,itemsNeeded);
+
+        driver.findElement(By.cssSelector("img[alt='Cart']")).click();
+        driver.findElement(By.xpath("//button[contains(text(),'PROCEED TO CHECKOUT')]")).click();
+
+        driver.findElement(By.cssSelector("input.promoCode")).sendKeys("rahulshettyacademy");
+        driver.findElement(By.cssSelector("button.promoBtn")).click();
+
+        //explicit wait
+        w.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.promoInfo")));
+        System.out.println(driver.findElement(By.cssSelector("span.promoInfo")).getText());
     }
 
 
